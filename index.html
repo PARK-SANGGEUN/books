@@ -2,148 +2,166 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>시너지 밴드의 서재</title>
+<title>시너지 밴드의 서재 v1.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Pretendard:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 
 body{
   margin:0;
-  font-family:"Noto Sans KR", sans-serif;
-  background:linear-gradient(180deg,#dce9f5,#eef6ff);
+  font-family:"Pretendard","Noto Sans KR",sans-serif;
+  background:linear-gradient(180deg,#0f1b2c,#182b44,#203b59);
+  color:white;
 }
 
-/* ---------------- 제목 ---------------- */
+/* 제목 */
 h1{
   text-align:center;
-  padding:18px 10px 8px;
-  font-size:30px;
+  padding:22px 10px 14px;
+  font-size:36px;
   font-weight:900;
-  color:#0f3366;
+  letter-spacing:1.5px;
+  font-family:"Playfair Display",serif;
+  color:#ffd369;
+  text-shadow:0 4px 14px rgba(0,0,0,.7);
 }
 
-/* ---------------- 구역 제목 ---------------- */
+/* 구역제목 */
 .section-title{
-  width:100%;
-  max-width:1100px;
-  margin:0 auto;
+  max-width:1200px;
+  margin:14px auto 0;
   font-size:18px;
-  font-weight:800;
-  margin-top:18px;
+  font-weight:900;
+  color:#ffebc2;
 }
 
-/* ---------------- 책장 박스 ---------------- */
+/* 전체 책장 박스 */
 .shelf{
-  max-width:1100px;
-  margin:10px auto 30px;
-  padding:18px;
-  border-radius:20px;
-  background:#c8b08a;
+  max-width:1200px;
+  margin:12px auto 30px;
+  padding:26px 20px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#7b5a2d,#5e431f,#8a6333);
   box-shadow:
-    inset 0 0 40px rgba(0,0,0,.25),
-    0 8px 18px rgba(0,0,0,.25);
-}
-
-/* ---------------- 책 위치 그리드 ---------------- */
-.books{
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:30px;
-  padding:20px 10px;
-}
-
-/* ---------------- 책 공통 스타일 ---------------- */
-.book{
-  width:100%;
-  height:200px;
-  background:#eee;
-  border-radius:6px;
-  box-shadow:6px 10px 20px rgba(0,0,0,.35);
-  transform:rotate(-3deg);
-  transition:.35s;
-  overflow:hidden;
-  cursor:pointer;
+    inset 0 0 40px rgba(0,0,0,.45),
+    0 12px 26px rgba(0,0,0,.55);
   position:relative;
 }
 
-/* ---------------- 책 표지 이미지 ---------------- */
-.book img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+/* 칸막이(세로 구분) */
+.divider{
+  position:absolute;
+  top:25px;
+  bottom:25px;
+  width:10px;
+  background:linear-gradient(90deg,#4a3014,#8a6333);
+  box-shadow:inset -3px 0 6px rgba(0,0,0,.7);
 }
 
-/* ---------------- 책 hover 애니메이션 ---------------- */
-.book:hover{
-  transform:rotate(0deg) scale(1.04);
-  box-shadow:12px 16px 30px rgba(0,0,0,.45);
-  animation: wiggle 0.25s ease-in-out;
-}
-
-/* 살짝 흔들리는 효과 */
-@keyframes wiggle {
-  0%{ transform:rotate(-2deg);}
-  50%{ transform:rotate(2deg);}
-  100%{ transform:rotate(0deg);}
-}
-
-/* ---------------- 책 넘기는 느낌 (빛 반사) ---------------- */
-.book::after{
+/* 왼쪽과 오른쪽 입체 옆면 */
+.shelf::before{
   content:"";
   position:absolute;
   top:0;
-  left:-120%;
-  width:60%;
+  bottom:0;
+  left:-18px;
+  width:18px;
+  background:linear-gradient(180deg,#2b1a09,#725027);
+}
+.shelf::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:-18px;
+  width:18px;
+  background:linear-gradient(180deg,#2b1a09,#725027);
+}
+
+/* 책 자리 */
+.books{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:32px;
+  padding:20px 15px;
+}
+
+/* ===== 책 (3D) ===== */
+.book{
+  position:relative;
+  height:200px;
+  cursor:pointer;
+  transform:rotate(-2deg);
+  transition:.35s;
+  perspective:800px;
+}
+
+/* 책 표지 */
+.cover{
+  width:100%;
   height:100%;
-  background:linear-gradient(75deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0.0) 100%);
-  transform:skewX(-15deg);
+  background:white;
+  border-radius:6px;
+  overflow:hidden;
+  transform:rotateY(-6deg);
+  box-shadow:
+    6px 10px 20px rgba(0,0,0,.55),
+    inset -6px 0 14px rgba(0,0,0,.35);
 }
 
-.book:hover::after{
-  animation: pageflip 0.9s forwards;
+/* 표지 이미지 */
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:white;
+  padding:6px;
 }
 
-@keyframes pageflip{
-  from{ left:-120%; }
-  to{ left:140%; }
+/* 책 옆면 (두께) */
+.cover::after{
+  content:"";
+  position:absolute;
+  top:6px;
+  bottom:6px;
+  right:-12px;
+  width:12px;
+  border-radius:0 6px 6px 0;
+  background:repeating-linear-gradient(
+    90deg,#eee,#ddd 2px,#ccc 3px,#ddd 4px
+  );
+  box-shadow: inset 2px 0 4px rgba(0,0,0,.35);
 }
 
-/* ---------------- COMING SOON ---------------- */
+/* Hover 효과 */
+.book:hover{
+  transform:rotate(0deg) scale(1.05);
+}
+.book:hover .cover{
+  transform:rotateY(-2deg);
+}
+
+/* COMING SOON 책 */
 .coming{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:20px;
   font-weight:900;
-  color:#888;
+  font-size:18px;
+  color:#555;
   background:repeating-linear-gradient(
-    45deg,
-    #f3e9d2,
-    #f3e9d2 10px,
-    #e7d8b9 10px,
-    #e7d8b9 20px
+    45deg,#f8e7c7,#f2d8aa 12px,#e8cfa1 12px,#e1c28f 24px
   );
-  text-shadow:1px 1px 2px white;
 }
 
-.coming::before{
-  content:"COMING SOON";
-}
-
-/* ---------------- 반응형 ---------------- */
+/* 반응형 */
 @media(max-width:900px){
-  .books{
-    grid-template-columns: repeat(2,1fr);
-  }
+  .books{ grid-template-columns:repeat(2,1fr);}
 }
-
 @media(max-width:600px){
-  .books{
-    grid-template-columns:1fr;
-  }
-  .book{
-    height:220px;
-  }
+  .books{ grid-template-columns:1fr;}
 }
 
 </style>
@@ -151,60 +169,75 @@ h1{
 
 <body>
 
-<h1>📚 시너지 밴드의 서재</h1>
+<h1>📚 시너지 밴드의 서재 v1.</h1>
 
-<!-- ▣▣▣ 1단 : 대입 자료 ▣▣▣ -->
+<!-- 1층 : 대입 자료 -->
 <div class="section-title">🎓 대입 자료</div>
-
 <div class="shelf">
   <div class="books">
 
     <a class="book" href="https://drive.google.com/file/d/1Rn9Rz4v34drsdGD2cFv-NbNN4ttvFI4l/view" target="_blank">
-      <img src="2027대입정보119.png">
+      <div class="cover"><img src="2027대입정보119.png"></div>
     </a>
 
     <a class="book" href="https://drive.google.com/file/d/19LknsksrRHt7KDo9xYg8aMGH-e23IR8i/view" target="_blank">
-      <img src="2028모집단위별반영과목.png">
+      <div class="cover"><img src="2028모집단위별반영과목.png"></div>
     </a>
 
-    <div class="book coming"></div>
+    <div class="book"><div class="cover coming">COMING SOON</div></div>
 
   </div>
 </div>
 
-
-<!-- ▣▣▣ 2단 상단 : 면접 자료 ▣▣▣ -->
-<div class="section-title">🧭 면접 자료</div>
-
+<!-- 2층 : 탐구 소재(면접자료) -->
+<div class="section-title">🧭 탐구 소재(면접자료)</div>
 <div class="shelf">
   <div class="books">
 
     <a class="book" href="https://drive.google.com/file/d/1O7XKBRK4MHPM-79lx-XjnFYeAPLrQ25n/view" target="_blank">
-      <img src="신입생선발면접1.png">
+      <div class="cover"><img src="신입생선발면접1.png"></div>
     </a>
 
     <a class="book" href="https://drive.google.com/file/d/1DS72JzaT6wmgE6mCB-_-mWOOjm8QqXym/view" target="_blank">
-      <img src="신입생선발면접2.png">
+      <div class="cover"><img src="신입생선발면접2.png"></div>
     </a>
 
-    <div class="book coming"></div>
+    <div class="book"><div class="cover coming">COMING SOON</div></div>
 
   </div>
 </div>
 
-
-<!-- ▣▣▣ 2단 하단 : 탐구 자료 ▣▣▣ -->
+<!-- 3층 : 탐구 활동 자료 -->
 <div class="section-title">🔍 탐구 활동 자료</div>
-
 <div class="shelf">
   <div class="books">
 
     <a class="book" href="https://drive.google.com/file/d/1WaiLDEVoYwGygg5AWsMS3QowE7WLP2gV/view" target="_blank">
-      <img src="교과주제.png">
+      <div class="cover"><img src="교과주제.png"></div>
     </a>
 
-    <div class="book coming"></div>
-    <div class="book coming"></div>
+    <div class="book"><div class="cover coming">COMING SOON</div></div>
+    <div class="book"><div class="cover coming">COMING SOON</div></div>
+
+  </div>
+</div>
+
+<!-- 4층 : 탐구 참고 사이트 -->
+<div class="section-title">🌐 탐구 참고 사이트</div>
+<div class="shelf">
+  <div class="books">
+
+    <a class="book" href="https://m.thescienceplus.com/" target="_blank">
+      <div class="cover"><img src="더사이언스플러스.png"></div>
+    </a>
+
+    <a class="book" href="https://www.singlestar.co.kr" target="_blank">
+      <div class="cover"><img src="생글생글.png"></div>
+    </a>
+
+    <a class="book" href="https://www.jinron.kr" target="_blank">
+      <div class="cover"><img src="진로엔뉴스.png"></div>
+    </a>
 
   </div>
 </div>
