@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시너지 밴드의 서재</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+  margin:0;
+  font-family:"Noto Sans KR", sans-serif;
+  background:linear-gradient(180deg,#dce9f5,#eef6ff);
+}
+
+/* ---------------- 제목 ---------------- */
+h1{
+  text-align:center;
+  padding:18px 10px 8px;
+  font-size:30px;
+  font-weight:900;
+  color:#0f3366;
+}
+
+/* ---------------- 구역 제목 ---------------- */
+.section-title{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  font-size:18px;
+  font-weight:800;
+  margin-top:18px;
+}
+
+/* ---------------- 책장 박스 ---------------- */
+.shelf{
+  max-width:1100px;
+  margin:10px auto 30px;
+  padding:18px;
+  border-radius:20px;
+  background:#c8b08a;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,.25),
+    0 8px 18px rgba(0,0,0,.25);
+}
+
+/* ---------------- 책 위치 그리드 ---------------- */
+.books{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:30px;
+  padding:20px 10px;
+}
+
+/* ---------------- 책 공통 스타일 ---------------- */
+.book{
+  width:100%;
+  height:200px;
+  background:#eee;
+  border-radius:6px;
+  box-shadow:6px 10px 20px rgba(0,0,0,.35);
+  transform:rotate(-3deg);
+  transition:.35s;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+}
+
+/* ---------------- 책 표지 이미지 ---------------- */
+.book img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ---------------- 책 hover 애니메이션 ---------------- */
+.book:hover{
+  transform:rotate(0deg) scale(1.04);
+  box-shadow:12px 16px 30px rgba(0,0,0,.45);
+  animation: wiggle 0.25s ease-in-out;
+}
+
+/* 살짝 흔들리는 효과 */
+@keyframes wiggle {
+  0%{ transform:rotate(-2deg);}
+  50%{ transform:rotate(2deg);}
+  100%{ transform:rotate(0deg);}
+}
+
+/* ---------------- 책 넘기는 느낌 (빛 반사) ---------------- */
+.book::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(75deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0.0) 100%);
+  transform:skewX(-15deg);
+}
+
+.book:hover::after{
+  animation: pageflip 0.9s forwards;
+}
+
+@keyframes pageflip{
+  from{ left:-120%; }
+  to{ left:140%; }
+}
+
+/* ---------------- COMING SOON ---------------- */
+.coming{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:900;
+  color:#888;
+  background:repeating-linear-gradient(
+    45deg,
+    #f3e9d2,
+    #f3e9d2 10px,
+    #e7d8b9 10px,
+    #e7d8b9 20px
+  );
+  text-shadow:1px 1px 2px white;
+}
+
+.coming::before{
+  content:"COMING SOON";
+}
+
+/* ---------------- 반응형 ---------------- */
+@media(max-width:900px){
+  .books{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .books{
+    grid-template-columns:1fr;
+  }
+  .book{
+    height:220px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>📚 시너지 밴드의 서재</h1>
+
+<!-- ▣▣▣ 1단 : 대입 자료 ▣▣▣ -->
+<div class="section-title">🎓 대입 자료</div>
+
+<div class="shelf">
+  <div class="books">
+
+    <a class="book" href="https://drive.google.com/file/d/1Rn9Rz4v34drsdGD2cFv-NbNN4ttvFI4l/view" target="_blank">
+      <img src="2027대입정보119.png">
+    </a>
+
+    <a class="book" href="https://drive.google.com/file/d/19LknsksrRHt7KDo9xYg8aMGH-e23IR8i/view" target="_blank">
+      <img src="2028모집단위별반영과목.png">
+    </a>
+
+    <div class="book coming"></div>
+
+  </div>
+</div>
+
+
+<!-- ▣▣▣ 2단 상단 : 면접 자료 ▣▣▣ -->
+<div class="section-title">🧭 면접 자료</div>
+
+<div class="shelf">
+  <div class="books">
+
+    <a class="book" href="https://drive.google.com/file/d/1O7XKBRK4MHPM-79lx-XjnFYeAPLrQ25n/view" target="_blank">
+      <img src="신입생선발면접1.png">
+    </a>
+
+    <a class="book" href="https://drive.google.com/file/d/1DS72JzaT6wmgE6mCB-_-mWOOjm8QqXym/view" target="_blank">
+      <img src="신입생선발면접2.png">
+    </a>
+
+    <div class="book coming"></div>
+
+  </div>
+</div>
+
+
+<!-- ▣▣▣ 2단 하단 : 탐구 자료 ▣▣▣ -->
+<div class="section-title">🔍 탐구 활동 자료</div>
+
+<div class="shelf">
+  <div class="books">
+
+    <a class="book" href="https://drive.google.com/file/d/1WaiLDEVoYwGygg5AWsMS3QowE7WLP2gV/view" target="_blank">
+      <img src="교과주제.png">
+    </a>
+
+    <div class="book coming"></div>
+    <div class="book coming"></div>
+
+  </div>
+</div>
+
+</body>
+</html>
