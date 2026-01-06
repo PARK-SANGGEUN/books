@@ -12,8 +12,7 @@
 body{
   margin:0;
   font-family:"Pretendard","Noto Sans KR",sans-serif;
-  background:linear-gradient(180deg,#0f1b2c,#182b44,#203b59);
-  color:white;
+  background:linear-gradient(180deg,#eef6ff,#f9fbff,#ffffff);
 }
 
 /* 제목 */
@@ -22,10 +21,9 @@ h1{
   padding:22px 10px 14px;
   font-size:36px;
   font-weight:900;
-  letter-spacing:1.5px;
   font-family:"Playfair Display",serif;
-  color:#ffd369;
-  text-shadow:0 4px 14px rgba(0,0,0,.7);
+  color:#1c3c84;
+  text-shadow:0 4px 12px rgba(0,0,0,.25);
 }
 
 /* 구역제목 */
@@ -34,81 +32,48 @@ h1{
   margin:14px auto 0;
   font-size:18px;
   font-weight:900;
-  color:#ffebc2;
+  color:#333;
 }
 
-/* 전체 책장 박스 */
+/* 책장 */
 .shelf{
   max-width:1200px;
   margin:12px auto 30px;
   padding:26px 20px;
   border-radius:18px;
-  background:linear-gradient(135deg,#7b5a2d,#5e431f,#8a6333);
-  box-shadow:
-    inset 0 0 40px rgba(0,0,0,.45),
-    0 12px 26px rgba(0,0,0,.55);
+  background:linear-gradient(135deg,#d9c3a2,#e8d2af,#d3b58b);
+  box-shadow:inset 0 0 25px rgba(0,0,0,.25),0 12px 24px rgba(0,0,0,.35);
   position:relative;
 }
 
-/* 칸막이(세로 구분) */
-.divider{
-  position:absolute;
-  top:25px;
-  bottom:25px;
-  width:10px;
-  background:linear-gradient(90deg,#4a3014,#8a6333);
-  box-shadow:inset -3px 0 6px rgba(0,0,0,.7);
-}
-
-/* 왼쪽과 오른쪽 입체 옆면 */
-.shelf::before{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:-18px;
-  width:18px;
-  background:linear-gradient(180deg,#2b1a09,#725027);
-}
-.shelf::after{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  right:-18px;
-  width:18px;
-  background:linear-gradient(180deg,#2b1a09,#725027);
-}
-
-/* 책 자리 */
+/* 책 그리드 */
 .books{
   display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:32px;
-  padding:20px 15px;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  padding:10px;
 }
 
-/* ===== 책 (3D) ===== */
+/* 책 */
 .book{
   position:relative;
   height:200px;
-  cursor:pointer;
   transform:rotate(-2deg);
   transition:.35s;
-  perspective:800px;
+  perspective:700px;
 }
 
-/* 책 표지 */
+/* 표지 */
 .cover{
   width:100%;
   height:100%;
   background:white;
-  border-radius:6px;
+  border-radius:14px;
+  border:2px solid rgba(255,255,255,.7);
   overflow:hidden;
-  transform:rotateY(-6deg);
-  box-shadow:
-    6px 10px 20px rgba(0,0,0,.55),
-    inset -6px 0 14px rgba(0,0,0,.35);
+  transform:rotateY(-5deg);
+  box-shadow:8px 12px 22px rgba(0,0,0,.4);
+  position:relative;
 }
 
 /* 표지 이미지 */
@@ -117,52 +82,58 @@ h1{
   height:100%;
   object-fit:contain;
   background:white;
-  padding:6px;
+  padding:3%;
+  image-rendering:-webkit-optimize-contrast;
 }
 
-/* 책 옆면 (두께) */
+/* 책 옆면 */
 .cover::after{
   content:"";
   position:absolute;
-  top:6px;
-  bottom:6px;
+  top:8px;
+  bottom:8px;
   right:-12px;
   width:12px;
-  border-radius:0 6px 6px 0;
-  background:repeating-linear-gradient(
-    90deg,#eee,#ddd 2px,#ccc 3px,#ddd 4px
-  );
-  box-shadow: inset 2px 0 4px rgba(0,0,0,.35);
+  background:repeating-linear-gradient(90deg,#eee,#ddd 2px,#ccc 3px,#ddd 4px);
+  border-radius:0 10px 10px 0;
+  box-shadow:inset 2px 0 5px rgba(0,0,0,.25);
 }
 
-/* Hover 효과 */
+/* hover */
 .book:hover{
   transform:rotate(0deg) scale(1.05);
 }
-.book:hover .cover{
-  transform:rotateY(-2deg);
+.book:hover .cover{ transform:rotateY(-2deg); }
+
+/* 🔥 표지 위 제목 자동 Overlay */
+.title-overlay{
+  position:absolute;
+  bottom:6px;
+  left:6px;
+  right:6px;
+  padding:6px 10px;
+  font-size:13px;
+  font-weight:900;
+  color:#ffffff;
+  text-shadow:0 2px 6px rgba(0,0,0,.6);
+  background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.25));
+  border-radius:10px;
+  backdrop-filter:blur(2px);
 }
 
-/* COMING SOON 책 */
+/* COMING SOON */
 .coming{
+  font-weight:900;
+  font-size:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:900;
-  font-size:18px;
-  color:#555;
-  background:repeating-linear-gradient(
-    45deg,#f8e7c7,#f2d8aa 12px,#e8cfa1 12px,#e1c28f 24px
-  );
+  background:repeating-linear-gradient(45deg,#f9e9cc,#f3d9aa 12px,#f0d29a 24px);
 }
 
 /* 반응형 */
-@media(max-width:900px){
-  .books{ grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:600px){
-  .books{ grid-template-columns:1fr;}
-}
+@media(max-width:900px){ .books{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:600px){ .books{grid-template-columns:1fr;} }
 
 </style>
 </head>
@@ -171,23 +142,33 @@ h1{
 
 <h1>📚 시너지 밴드의 서재 v1.</h1>
 
+
 <!-- 1층 : 대입 자료 -->
 <div class="section-title">🎓 대입 자료</div>
 <div class="shelf">
   <div class="books">
 
     <a class="book" href="https://drive.google.com/file/d/1Rn9Rz4v34drsdGD2cFv-NbNN4ttvFI4l/view" target="_blank">
-      <div class="cover"><img src="2027대입정보119.png"></div>
+      <div class="cover">
+        <img src="2027대입정보119.png">
+        <div class="title-overlay">2027 대입정보 119</div>
+      </div>
     </a>
 
     <a class="book" href="https://drive.google.com/file/d/19LknsksrRHt7KDo9xYg8aMGH-e23IR8i/view" target="_blank">
-      <div class="cover"><img src="2028모집단위별반영과목.png"></div>
+      <div class="cover">
+        <img src="2028모집단위별반영과목.png">
+        <div class="title-overlay">2028 모집단위별 반영과목·권장과목</div>
+      </div>
     </a>
 
-    <div class="book"><div class="cover coming">COMING SOON</div></div>
+    <div class="book">
+      <div class="cover coming">COMING SOON</div>
+    </div>
 
   </div>
 </div>
+
 
 <!-- 2층 : 탐구 소재(면접자료) -->
 <div class="section-title">🧭 탐구 소재(면접자료)</div>
@@ -195,17 +176,26 @@ h1{
   <div class="books">
 
     <a class="book" href="https://drive.google.com/file/d/1O7XKBRK4MHPM-79lx-XjnFYeAPLrQ25n/view" target="_blank">
-      <div class="cover"><img src="신입생선발면접1.png"></div>
+      <div class="cover">
+        <img src="신입생선발면접1.png">
+        <div class="title-overlay">신입생 선발 면접 자료 1</div>
+      </div>
     </a>
 
     <a class="book" href="https://drive.google.com/file/d/1DS72JzaT6wmgE6mCB-_-mWOOjm8QqXym/view" target="_blank">
-      <div class="cover"><img src="신입생선발면접2.png"></div>
+      <div class="cover">
+        <img src="신입생선발면접2.png">
+        <div class="title-overlay">신입생 선발 면접 자료 2</div>
+      </div>
     </a>
 
-    <div class="book"><div class="cover coming">COMING SOON</div></div>
+    <div class="book">
+      <div class="cover coming">COMING SOON</div>
+    </div>
 
   </div>
 </div>
+
 
 <!-- 3층 : 탐구 활동 자료 -->
 <div class="section-title">🔍 탐구 활동 자료</div>
@@ -213,7 +203,10 @@ h1{
   <div class="books">
 
     <a class="book" href="https://drive.google.com/file/d/1WaiLDEVoYwGygg5AWsMS3QowE7WLP2gV/view" target="_blank">
-      <div class="cover"><img src="교과주제.png"></div>
+      <div class="cover">
+        <img src="교과주제.png">
+        <div class="title-overlay">교과 주제 탐구 활동 자료집</div>
+      </div>
     </a>
 
     <div class="book"><div class="cover coming">COMING SOON</div></div>
@@ -222,21 +215,31 @@ h1{
   </div>
 </div>
 
+
 <!-- 4층 : 탐구 참고 사이트 -->
 <div class="section-title">🌐 탐구 참고 사이트</div>
 <div class="shelf">
   <div class="books">
 
     <a class="book" href="https://m.thescienceplus.com/" target="_blank">
-      <div class="cover"><img src="더사이언스플러스.png"></div>
+      <div class="cover">
+        <img src="더사이언스플러스.png">
+        <div class="title-overlay">더사이언스플러스</div>
+      </div>
     </a>
 
     <a class="book" href="https://www.singlestar.co.kr" target="_blank">
-      <div class="cover"><img src="생글생글.png"></div>
+      <div class="cover">
+        <img src="생글생글.png">
+        <div class="title-overlay">생글생글</div>
+      </div>
     </a>
 
     <a class="book" href="https://www.jinron.kr" target="_blank">
-      <div class="cover"><img src="진로엔뉴스.png"></div>
+      <div class="cover">
+        <img src="진로엔뉴스.png">
+        <div class="title-overlay">진로엔뉴스</div>
+      </div>
     </a>
 
   </div>
